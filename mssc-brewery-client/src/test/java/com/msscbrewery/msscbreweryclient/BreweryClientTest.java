@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.msscbrewery.msscbreweryclient.web.client.BreweryClient;
 import com.msscbrewery.msscbreweryclient.web.model.BeerDto;
+import com.msscbrewery.msscbreweryclient.web.model.CustomerDto;
 
 @SpringBootTest
 class BreweryClientTest {
@@ -47,6 +48,36 @@ class BreweryClientTest {
 		//given
 		
 		client.deleteBeer(UUID.randomUUID());
+	}
+	@Test
+	void getCustById() {
+		CustomerDto dto = client.getCustomerById(UUID.randomUUID());
+		assertNotNull(dto);
+	}
+	
+	@Test
+	void saveNewCust() {
+		CustomerDto dto  = CustomerDto.builder().name("Yannick").build();
+		
+		URI uri = client.saveNewCustomer(dto);
+		assertNotNull(uri);
+		
+		System.out.println(uri.toString());
+		
+	}
+	
+	@Test
+	void testUpdateCust() {
+		//given
+		CustomerDto dto  = CustomerDto.builder().name("Yannick").build();
+		client.updateCustomer(UUID.randomUUID(), dto);
+	}
+	
+	@Test
+	void testDeleteCustomer() {
+		//given
+		
+		client.deleteCustomer(UUID.randomUUID());
 	}
 
 }

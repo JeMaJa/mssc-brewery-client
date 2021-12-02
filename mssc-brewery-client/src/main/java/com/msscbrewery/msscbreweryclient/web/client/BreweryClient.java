@@ -9,12 +9,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.msscbrewery.msscbreweryclient.web.model.BeerDto;
+import com.msscbrewery.msscbreweryclient.web.model.CustomerDto;
 
 @Component
 @ConfigurationProperties(value = "sfg.brewery", ignoreUnknownFields = false)
 public class BreweryClient {
 	public final String BEER_PATH_V1 = "/api/v1/beer/";
-	
+	public final String CUSTOMER_PATH_V1 = "/api/v1/customer/";
 	private String apiHost;
 	private final RestTemplate restTemplate;
 	
@@ -43,5 +44,24 @@ public class BreweryClient {
 	public void deleteBeer(UUID uuid) {
 		restTemplate.delete(apiHost + BEER_PATH_V1 + uuid.toString());
 	}
+	
+	public CustomerDto getCustomerById(UUID uuid) {
+		return restTemplate.getForObject(apiHost + CUSTOMER_PATH_V1 + uuid,CustomerDto.class);
+	}
+	
+	public URI saveNewCustomer(CustomerDto customerDto) {
+		return restTemplate.postForLocation(apiHost + CUSTOMER_PATH_V1, customerDto);
+		
+	}
+	
+	public void updateCustomer(UUID uuid, CustomerDto customerDto) {
+		restTemplate.put(apiHost + CUSTOMER_PATH_V1 + uuid.toString(), customerDto);
+		
+	}
+	
+	public void deleteCustomer(UUID uuid) {
+		restTemplate.delete(apiHost + CUSTOMER_PATH_V1 + uuid.toString());
+	}
+	
 	
 }

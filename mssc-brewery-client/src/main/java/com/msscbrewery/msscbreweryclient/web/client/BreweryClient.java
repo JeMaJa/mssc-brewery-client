@@ -12,7 +12,7 @@ import com.msscbrewery.msscbreweryclient.web.model.BeerDto;
 import com.msscbrewery.msscbreweryclient.web.model.CustomerDto;
 
 @Component
-@ConfigurationProperties(value = "sfg.brewery", ignoreUnknownFields = false)
+@ConfigurationProperties(value = "sfg.brewery", ignoreUnknownFields = true)
 public class BreweryClient {
 	public final String BEER_PATH_V1 = "/api/v1/beer/";
 	public final String CUSTOMER_PATH_V1 = "/api/v1/customer/";

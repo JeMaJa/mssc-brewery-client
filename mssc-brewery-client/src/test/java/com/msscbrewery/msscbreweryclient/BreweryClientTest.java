@@ -2,6 +2,7 @@ package com.msscbrewery.msscbreweryclient;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.util.UUID;
 
@@ -27,7 +28,7 @@ class BreweryClientTest {
 	
 	@Test
 	void saveNewBeer() {
-		BeerDto beerDto = BeerDto.builder().BeerName("E+Y Christmas Ale").build();
+		BeerDto beerDto = BeerDto.builder().beerName("E+Y Christmas Ale").beerStyle("SAISON").upc(1002L).price(new BigDecimal("12.4")).build();
 		
 		URI uri = client.saveNewBeer(beerDto);
 		assertNotNull(uri);
@@ -39,7 +40,7 @@ class BreweryClientTest {
 	@Test
 	void testUpdateBeer() {
 		//given
-		BeerDto beerDto = BeerDto.builder().BeerName("E+Y Christmas Ale").build();
+		BeerDto beerDto = BeerDto.builder().beerName("E+Y Christmas Ale").build();
 		client.updateBeer(UUID.randomUUID(), beerDto);
 	}
 	
